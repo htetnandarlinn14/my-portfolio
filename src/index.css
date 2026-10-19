@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    /* Premium dark canvas built from the charcoal + mint palette. */
+    @apply bg-charcoal bg-page-gradient font-sans text-off-white antialiased;
+  }
+
+  /* Keep anchored sections clear of the sticky navbar. */
+  section[id] {
+    @apply scroll-mt-24;
+  }
+
+  ::selection {
+    @apply bg-mint text-charcoal;
+  }
+}
+
+@layer components {
+  /* ===== Buttons ===== */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold
+      transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint
+      focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal disabled:cursor-not-allowed
+      disabled:opacity-60;
+  }
+
+  /* Mint gradient button — charcoal text keeps contrast strong. */
+  .btn-primary {
+    @apply btn bg-mint-gradient text-charcoal shadow-glow hover:-translate-y-0.5 hover:brightness-105;
+  }
+
+  /* Outlined mint button for use on dark backgrounds. */
+  .btn-outline {
+    @apply btn border border-mint/40 text-mint hover:-translate-y-0.5 hover:border-mint hover:bg-mint/10;
+  }
+
+  /* Compact button used inside cards. */
+  .btn-sm {
+    @apply px-4 py-2 text-xs;
+  }
+
+  /* ===== Surfaces ===== */
+  .card {
+    @apply rounded-2xl border border-mint/10 bg-secondary-dark/70 shadow-card backdrop-blur
+      transition-all duration-300 hover:-translate-y-1 hover:border-mint/30 hover:shadow-glow;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-mint/10 bg-secondary-dark/50;
+  }
+
+  /* ===== Typography helpers ===== */
+  .eyebrow {
+    @apply mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-deep-mint sm:text-sm;
+  }
+
+  .section-title {
+    @apply text-balance font-display text-3xl font-bold leading-tight tracking-tight text-off-white
+      md:text-4xl;
+  }
+
+  .section-lead {
+    @apply mx-auto max-w-2xl text-pretty leading-relaxed text-muted-gray;
+  }
+
+  /* ===== Navigation ===== */
+  /* Desktop nav link with an underline that grows on hover / active. */
+  .nav-link {
+    @apply relative rounded-sm text-sm text-muted-gray transition-colors hover:text-mint
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2
+      focus-visible:ring-offset-charcoal;
+  }
+
+  .nav-link::after {
+    content: "";
+    @apply absolute -bottom-1.5 left-0 h-px w-0 bg-mint transition-all duration-300;
+  }
+
+  .nav-link:hover::after,
+  .nav-link[data-active="true"]::after {
+    @apply w-full;
+  }
+
+  .nav-link[data-active="true"] {
+    @apply text-mint;
+  }
+
+  /* ===== Small pieces ===== */
+  .badge {
+    @apply inline-flex items-center rounded-full border border-mint/20 bg-mint/10 px-3 py-1 text-xs
+      font-medium text-mint transition-colors duration-200;
+  }
+
+  .social-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-mint/25 px-4 py-2 text-sm
+      text-muted-gray transition-all duration-200 hover:border-mint hover:text-mint
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2
+      focus-visible:ring-offset-charcoal;
+  }
+}
+
+/* Respect users who prefer less motion: keep the layout, drop the movement. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
